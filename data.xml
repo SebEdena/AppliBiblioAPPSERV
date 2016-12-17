@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<data>
+	<livre id="1">
+		<nom>Nom du livre</nom>
+		<auteur>Nom de l'auteur</auteur>
+		<emprunt>id de l'adherent</emprunt>
+		<reserve>id de celui qui a reserve</reserve>
+	</livre>
+	<livre id="2">
+		<nom>Nom du livre</nom>
+		<auteur>Nom de l'auteur</auteur>
+		<emprunt>id de l'adherent</emprunt>
+		<reserve>id de celui qui a reserve</reserve>
+	</livre>
+	<livre id="3">
+		<nom>Nom du livre</nom>
+		<auteur>Nom de l'auteur</auteur>
+		<emprunt>id de l'adherent</emprunt>
+		<reserve>id de celui qui a reserve</reserve>
+	</livre>     
+	<adherent id="1">
+		<nom>Nom adherent</nom>
+	</adherent>     
+	<adherent id="2">
+		<nom>Nom adherent</nom>
+	</adherent>     
+	<adherent id="3">
+		<nom>Nom adherent</nom>
+	</adherent>
+</data>
