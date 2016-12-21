@@ -1,30 +1,30 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<data>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<data>     
+	<abonne id="1">
+		<nom>Stephane Manamanche</nom>
+	</abonne>     
+	<abonne id="2">
+		<nom>Mathieu Valentin</nom>
+	</abonne>     
+	<abonne id="3">
+		<nom>Georges Robert</nom>
+	</abonne>
 	<livre id="1">
-		<nom>Nom du livre</nom>
-		<auteur>Nom de l'auteur</auteur>
-		<emprunt>id de l'adherent</emprunt>
-		<reserve>id de celui qui a reserve</reserve>
+		<nom>En attendant Godot</nom>
+		<auteur>Samuel Beckett</auteur>
+		<emprunt>1</emprunt>
+		<reserve>0</reserve>
 	</livre>
 	<livre id="2">
-		<nom>Nom du livre</nom>
-		<auteur>Nom de l'auteur</auteur>
-		<emprunt>id de l'adherent</emprunt>
-		<reserve>id de celui qui a reserve</reserve>
+		<nom>Le Cid</nom>
+		<auteur>Corneille</auteur>
+		<emprunt>0</emprunt>
+		<reserve>0</reserve>
 	</livre>
 	<livre id="3">
-		<nom>Nom du livre</nom>
-		<auteur>Nom de l'auteur</auteur>
-		<emprunt>id de l'adherent</emprunt>
-		<reserve>id de celui qui a reserve</reserve>
-	</livre>     
-	<adherent id="1">
-		<nom>Nom adherent</nom>
-	</adherent>     
-	<adherent id="2">
-		<nom>Nom adherent</nom>
-	</adherent>     
-	<adherent id="3">
-		<nom>Nom adherent</nom>
-	</adherent>
+		<nom>Le Japonais pour les nuls</nom>
+		<auteur>Stephane Martin</auteur>
+		<emprunt>0</emprunt>
+		<reserve>2</reserve>
+	</livre>
 </data>

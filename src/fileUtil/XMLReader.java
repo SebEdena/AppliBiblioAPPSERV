@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.soap.Node;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -37,7 +37,7 @@ public class XMLReader {
 						object.getAttribute("id").toString();
 				NodeList subobjects = object.getChildNodes();
 			    for (int j = 0; j < subobjects.getLength(); j++) {
-					Element sub = (Element) subobjects.item(i);
+					Node sub = subobjects.item(j);
 					if(sub.getNodeType() == Node.ELEMENT_NODE){
 						s+= ";" + sub.getTextContent();
 					}
@@ -48,7 +48,7 @@ public class XMLReader {
 		return data;
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		System.out.println(read("data.xml"));
-	}*/
+	}
 }
