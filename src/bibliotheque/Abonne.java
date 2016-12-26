@@ -8,7 +8,6 @@ public class Abonne {
 			ID_INDEX=1, NOM_INDEX=2, DATA_SIZE=3;
 	
 	private int idAbonne;
-	
 	private String nom;
 	
 	public Abonne(String[] data) {
@@ -31,5 +30,9 @@ public class Abonne {
 	
 	public String toString(){
 		return idAbonne + " : " + nom;
+	}
+
+	public String getNom() {
+		return nom;
 	}
 }
