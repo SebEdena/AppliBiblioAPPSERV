@@ -3,33 +3,38 @@ package bibliotheque;
 import java.util.ArrayList;
 import java.util.List;
 
-import documents.Livres;
+import documents.Livre;
 import fileUtil.XMLReader;
 
 public class Bibliothèque {
 	
+	private static Bibliothèque instance;
+	
 	private static final int ABO_INDEX = 4;
+	
+	private static String path = "data.xml";
 	
 	private List<Document> documents;
 	
 	private List<Abonne> abonnes;
 	
+	
 	public Bibliothèque(String path){
 		documents = new ArrayList<Document>();
 		abonnes = new ArrayList<Abonne>();
-		init(path);
+		init();
 	}
 
 	//Il faudra changer la dépendance du livre un fois la factory
 	//mise en place
-	private void init(String path) {
+	private void init() {
 		List<String> objects = XMLReader.read(path);
 		for(String s : objects){
 			String[] data = s.split(";");
 			switch(data[0]){
 			case "abonne" : abonnes.add(new Abonne(data));
 							break;
-			case "livre" : Livres l = new Livres(data);
+			case "livre" : Livre l = new Livre(data);
 							int id = Integer.valueOf(data[ABO_INDEX]);
 							if(id > 0)
 								try {
@@ -55,11 +60,29 @@ public class Bibliothèque {
 		return null;
 	}
 	
+	public Document findDocument(int id){
+		for(Document d : documents){
+			if(d.numero() == id)
+				return d;
+		}
+		return null;
+	}
+	
 	public List<Document> getDocuments(){
 		return documents;
 	}
 	
 	public List<Abonne> getAbonnes(){
 		return abonnes;
+	}
+	
+	public static Bibliothèque getInstance(){
+		if(instance == null)
+			instance = new Bibliothèque(path);
+		return instance;
+	}
+	
+	public static void setPath(String newpath){
+		path = newpath;
 	}
 }

@@ -28,7 +28,7 @@ public class Client {
 		int numDocument = clavier.nextInt();
 		/* envoi des données au service */
 		socketOut.println(numAbonné);
-		System.out.println(socketIn.readLine());
+		//System.out.println(socketIn.readLine());
 		socketOut.println(numDocument);
 		/* réception de la réponse
 		* et affichage de cette réponse */

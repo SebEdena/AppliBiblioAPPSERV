@@ -12,7 +12,7 @@
 	<livre id="1">
 		<nom>En attendant Godot</nom>
 		<auteur>Samuel Beckett</auteur>
-		<emprunt>1</emprunt>
+		<emprunt>0</emprunt>
 		<reserve>0</reserve>
 	</livre>
 	<livre id="2">
