@@ -20,35 +20,36 @@ public class ServiceReservation extends Service{
 	@Override
 	public void run() {
 		System.out.println("Nouveau client : " + getClient().getInetAddress());
+		BufferedReader in = null;
+		PrintWriter out = null;
 		try {
-			BufferedReader in = new BufferedReader (new InputStreamReader(getClient().getInputStream()));
-			PrintWriter out = new PrintWriter (getClient().getOutputStream (), true);
+			in = new BufferedReader (new InputStreamReader(getClient().getInputStream()));
+			out = new PrintWriter (getClient().getOutputStream (), true);
 
-			//while (true) {
-				// lit la ligne
-				String line = in.readLine();
-				Integer id = Integer.parseInt(line);
-				Abonne ab = Bibliothèque.getInstance().findAbonne(id);
-				if(ab == null)
-					throw new Exception("Abonné inexistant");
-				
-				line = in.readLine();
-				id = Integer.parseInt(line);
-				Document d = Bibliothèque.getInstance().findDocument(id);
-				System.out.println(d);
-				if(d == null)
-					throw new Exception("Document inexistant");
-				
-				d.reserver(ab);
-				
-				out.println("ok!\n"+d);
-			//}
+			// lit la ligne
+			String line = in.readLine();
+			Integer id = Integer.parseInt(line);
+			Abonne ab = Bibliothèque.getInstance().findAbonne(id);
+			if(ab == null)
+				throw new IllegalArgumentException("Abonné inexistant");
+
+			line = in.readLine();
+			id = Integer.parseInt(line);
+			Document d = Bibliothèque.getInstance().findDocument(id);
+			if(d == null)
+				throw new IllegalArgumentException("Document inexistant");
+
+			d.reserver(ab);
+
+			System.out.println(d);
+			out.println("La réservation a été effectuée.");
+		}
+		catch (PasLibreException | IllegalArgumentException e){
+			out.println("La réservation a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {
-			System.out.println("nol");
-		} 
-		catch (Exception e2) {
-			System.out.println("nok");
+			System.out.println("pb dans les readers/writers");
+			out.println("La réservation a échoué pour des raisons techniques.");
 		}
 		System.err.println("Fin du service");
 		try {getClient().close();} catch (IOException e2) {}

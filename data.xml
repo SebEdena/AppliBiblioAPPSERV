@@ -18,7 +18,7 @@
 	<livre id="2">
 		<nom>Le Cid</nom>
 		<auteur>Corneille</auteur>
-		<emprunt>0</emprunt>
+		<emprunt>2</emprunt>
 		<reserve>0</reserve>
 	</livre>
 	<livre id="3">
