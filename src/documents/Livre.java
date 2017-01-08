@@ -70,7 +70,6 @@ public class Livre implements Document{
 	@Override
 	public void retour() {
 		emprunteur = null;
-		reserveur = null;
 	}
 	
 	@Override
