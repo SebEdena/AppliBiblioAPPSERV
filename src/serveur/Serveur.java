@@ -9,7 +9,7 @@ public abstract class Serveur implements Runnable{
 	private ServerSocket listen_socket;
 	
 	Serveur(int port) throws IOException {
-		setListen_socket(new ServerSocket(port));
+		listen_socket = new ServerSocket(port);
 	}
 	
 	@Override
@@ -22,9 +22,8 @@ public abstract class Serveur implements Runnable{
 	public ServerSocket getListen_socket() {
 		return listen_socket;
 	}
-
-	public void setListen_socket(ServerSocket listen_socket) {
-		this.listen_socket = listen_socket;
+	
+	protected void finalize() throws Throwable {
+		try {listen_socket.close();} catch (IOException e1) {}
 	}
-
 }

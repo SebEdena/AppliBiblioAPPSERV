@@ -16,9 +16,8 @@ public class TestsBiblio {
 		Abonne a = new Abonne(test.get(3).split(";"));
 	}
 	
-	@Test 
-	public void testBiblio(){
-		Bibliothèque b = new Bibliothèque("data.xml");
+	public static void testBiblio(){
+		Bibliothèque b = Bibliothèque.getInstance();
 		
 		for(Abonne a : b.getAbonnes()){
 			System.out.println(a.toString());

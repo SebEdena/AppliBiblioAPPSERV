@@ -6,7 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import bibliotheque.Abonne;
 import bibliotheque.Bibliothèque;
+import bibliotheque.Document;
+import bibliotheque.PasLibreException;
+import bibliotheque.TestsBiblio;
 
 public class ServiceEmprunt extends Service{
 	
@@ -16,23 +20,39 @@ public class ServiceEmprunt extends Service{
 	
 	@Override
 	public void run() {
-		try {BufferedReader in = new BufferedReader (new InputStreamReader(getClient().getInputStream ( )));
-		PrintWriter out = new PrintWriter (getClient().getOutputStream ( ), true);
-				
-			while(true){
-				String line = in.readLine();
-				out.println("le service à reçu "+line);
-				
-			}
+		System.out.println("Nouveau client : " + getClient().getInetAddress());
+		BufferedReader in = null;
+		PrintWriter out = null;
+		try {
+			in = new BufferedReader (new InputStreamReader(getClient().getInputStream()));
+			out = new PrintWriter (getClient().getOutputStream (), true);
+
+			// lit la ligne
+			String line = in.readLine();
+			Integer id = Integer.parseInt(line);
+			Abonne ab = Bibliothèque.getInstance().findAbonne(id);
+			if(ab == null)
+				throw new IllegalArgumentException("Abonné inexistant");
+
+			line = in.readLine();
+			id = Integer.parseInt(line);
+			Document d = Bibliothèque.getInstance().findDocument(id);
+			if(d == null)
+				throw new IllegalArgumentException("Document inexistant");
+
+			d.emprunter(ab);
+
+			System.out.println(d);
+			out.println("L'emprunt a été enregistré.");
+		}
+		catch (PasLibreException | IllegalArgumentException e){
+			out.println("L'emprunt a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {
+			System.out.println("pb dans les readers/writers");
+			out.println("L'emprunt a échoué pour des raisons techniques.");
 		}
-		System.err.println("Fin du service d'emprunt : ");
+		System.err.println("Fin du service");
 		try {getClient().close();} catch (IOException e2) {}
-		
-	}
-	
-	protected void finalize() throws Throwable {
-		 getClient().close(); 
 	}
 }

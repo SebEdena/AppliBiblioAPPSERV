@@ -7,15 +7,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client {
+public class AppliBibliotheque {
 	
 	private static final String ADR_IP_BIBLIO = "localhost";
-	private static final int PORT_RESERVATION = 2500;
+	private final static int PORT_EMPRUNT = 2600;
 
 	public static void main(String[] args) throws IOException {
 		int numAbonné, numDocument;
 		Scanner clavier = new Scanner(System.in);
-		Socket laSocket = new Socket(ADR_IP_BIBLIO, PORT_RESERVATION);
+		Socket laSocket = new Socket(ADR_IP_BIBLIO, PORT_EMPRUNT);
 		BufferedReader socketIn = new BufferedReader(new InputStreamReader(laSocket.getInputStream()));
 		PrintWriter socketOut =  new PrintWriter(laSocket.getOutputStream(), true);
 		
@@ -48,5 +48,4 @@ public class Client {
 			return 0;
 		}
 	}
-}	
-
+}

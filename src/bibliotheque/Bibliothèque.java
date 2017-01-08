@@ -19,7 +19,7 @@ public class Bibliothèque {
 	private List<Abonne> abonnes;
 	
 	
-	public Bibliothèque(String path){
+	private Bibliothèque(String path){
 		documents = new ArrayList<Document>();
 		abonnes = new ArrayList<Abonne>();
 		init();

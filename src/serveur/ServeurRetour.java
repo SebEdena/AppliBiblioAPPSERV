@@ -22,9 +22,4 @@ public class ServeurRetour extends Serveur{
 		}
 	}
 
-	 // restituer les ressources --> finalize
-	protected void finalize() throws Throwable {
-		try {this.getListen_socket().close();} catch (IOException e1) {}
-	}
-
 }

@@ -22,4 +22,9 @@ public abstract class Service implements Runnable{
 	public Socket getClient() {
 		return client;
 	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		client.close();
+	}
 }
