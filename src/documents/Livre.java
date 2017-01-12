@@ -1,5 +1,7 @@
 package documents;
 
+import java.util.Timer;
+
 import bibliotheque.Abonne;
 import bibliotheque.Document;
 import bibliotheque.PasLibreException;
@@ -10,6 +12,8 @@ public class Livre implements Document{
 	private static final int TYPE_INDEX=0,
 			ID_INDEX=1, TITRE_INDEX=2, AUTEUR_INDEX=3,
 			EMP_INDEX = 4, RES_INDEX=5;
+	
+	private static final long TIMER_RES = 7200000, TIMER_EMP = 1000, TIMER_RES2 = 30000;
 	
 	private int idLivre;
 	
@@ -51,6 +55,8 @@ public class Livre implements Document{
 				throw new PasLibreException("Livre déjà emprunté");
 			}
 			reserveur = ab;
+			Timer t = new Timer();
+			t.schedule(new AnnuleRéservation(this, t), TIMER_RES2);
 		}
 	}
 
@@ -70,6 +76,10 @@ public class Livre implements Document{
 	@Override
 	public void retour() {
 		emprunteur = null;
+	}
+
+	public void annuleReservation() {
+		reserveur = null;
 	}
 	
 	@Override
