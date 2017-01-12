@@ -47,8 +47,4 @@ public class XMLReader {
 		}
 		return data;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(read("data.xml"));
-	}
 }

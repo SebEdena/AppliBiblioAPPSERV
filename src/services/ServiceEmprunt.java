@@ -9,8 +9,8 @@ import java.net.Socket;
 import bibliotheque.Abonne;
 import bibliotheque.Bibliothèque;
 import bibliotheque.Document;
-import bibliotheque.PasLibreException;
 import bibliotheque.TestsBiblio;
+import documents.PasLibreException;
 
 public class ServiceEmprunt extends Service{
 	
@@ -45,7 +45,7 @@ public class ServiceEmprunt extends Service{
 			System.out.println(d);
 			out.println("L'emprunt a été enregistré.");
 		}
-		catch (PasLibreException | IllegalArgumentException e){
+		catch (PasLibreException | IllegalArgumentException | IllegalStateException e){
 			out.println("L'emprunt a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import documents.Livre;
+import documents.PasLibreException;
 import fileUtil.XMLReader;
 
 public class Bibliothèque {
@@ -38,13 +39,14 @@ public class Bibliothèque {
 							int id = Integer.valueOf(data[ABO_INDEX]);
 							if(id > 0)
 								try {
+									System.out.println(findAbonne(id));
 									l.emprunter(findAbonne(id));
-								} catch (PasLibreException e) {}
+								} catch (PasLibreException | IllegalStateException e) {}
 							id = Integer.valueOf(data[ABO_INDEX+1]);
 							if(id > 0)
 								try {
 									l.reserver(findAbonne(id));
-								} catch (PasLibreException e) {}
+								} catch (PasLibreException | IllegalStateException e) {}
 							documents.add(l);
 							break;
 			default : continue;

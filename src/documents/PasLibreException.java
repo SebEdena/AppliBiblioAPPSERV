@@ -1,4 +1,4 @@
-package bibliotheque;
+package documents;
 
 public class PasLibreException extends Exception {
 

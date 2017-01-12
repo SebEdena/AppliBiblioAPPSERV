@@ -1,5 +1,7 @@
 package bibliotheque;
 
+import documents.PasLibreException;
+
 public interface Document {
 	int numero();
 	void reserver(Abonne ab) throws PasLibreException ;

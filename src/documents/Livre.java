@@ -4,7 +4,7 @@ import java.util.Timer;
 
 import bibliotheque.Abonne;
 import bibliotheque.Document;
-import bibliotheque.PasLibreException;
+import documents.etats.LivreLibre;
 
 public class Livre implements Document{
 	private static int cptLivre = 0;
@@ -13,17 +13,13 @@ public class Livre implements Document{
 			ID_INDEX=1, TITRE_INDEX=2, AUTEUR_INDEX=3,
 			EMP_INDEX = 4, RES_INDEX=5;
 	
-	private static final long TIMER_RES = 7200000, TIMER_EMP = 1000, TIMER_RES2 = 30000;
-	
 	private int idLivre;
 	
 	private String titre;
 	
 	private String auteur;
 	
-	private Abonne emprunteur;
-	
-	private Abonne reserveur;
+	private EtatLivre etat;
 	
 	public Livre(String[] data) {
 		
@@ -38,6 +34,7 @@ public class Livre implements Document{
 			}
 			titre = data[TITRE_INDEX];
 			auteur = data[TITRE_INDEX];
+			etat = new LivreLibre();
 		}
 	}
 
@@ -48,44 +45,30 @@ public class Livre implements Document{
 
 	@Override
 	public void reserver(Abonne ab) throws PasLibreException {
-		if(ab != null && ab != reserveur){
-			if(reserveur != null)
-				throw new PasLibreException("Livre déjà réservé");
-			if(emprunteur != null && emprunteur != ab){
-				throw new PasLibreException("Livre déjà emprunté");
-			}
-			reserveur = ab;
-			Timer t = new Timer();
-			t.schedule(new AnnuleRéservation(this, t), TIMER_RES2);
+		if(ab != null){
+			etat = etat.reservation(null, ab);
 		}
 	}
 
 	@Override
 	public void emprunter(Abonne ab) throws PasLibreException {
-		if(ab != null && ab != emprunteur){
-			if(reserveur != null && ab != reserveur)
-				throw new PasLibreException("Livre déjà réservé, "
-						+ "indisponible à l'emprunt");
-			if(emprunteur != null)
-				throw new PasLibreException("Livre déjà emprunté");
-			emprunteur = ab;
+		if(ab != null){
+			etat = etat.emprunt(ab);
 		}
-		reserveur = null;
 	}
 
 	@Override
 	public void retour() {
-		emprunteur = null;
+		etat = etat.retour();
 	}
 
-	public void annuleReservation() {
-		reserveur = null;
+	void annuleReservation() {
+		etat = etat.annuleReservation();
 	}
 	
 	@Override
 	public String toString() {
 		return idLivre + " : \"" + titre + "\", " + auteur + 
-				", emprunté par : " + emprunteur + ", réservé par : " + 
-				reserveur;
+				", " + etat.getStatus();
 	}
 }

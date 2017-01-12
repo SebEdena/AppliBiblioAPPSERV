@@ -35,7 +35,7 @@ public class ServiceRetour extends Service{
 			System.out.println(d);
 			out.println("Le retour a été enregistré.");
 		}
-		catch (IllegalArgumentException e){
+		catch (IllegalArgumentException | IllegalStateException e){
 			out.println("Le retour a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {
