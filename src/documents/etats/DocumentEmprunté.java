@@ -1,9 +1,11 @@
 package documents.etats;
 
 import dataAppli.Abonne;
+import dataAppli.Bibliothèque;
+import dataAppli.Document;
 import dataAppli.PasLibreException;
 import documents.EtatDocument;
-import documents.Livre;
+import fileUtil.Mailer;
 
 public class DocumentEmprunté implements EtatDocument {
 	
@@ -14,21 +16,24 @@ public class DocumentEmprunté implements EtatDocument {
 	}
 	
 	@Override
-	public EtatDocument emprunt(Abonne ab) throws PasLibreException, IllegalStateException {
-		if(abonne != ab)
-			throw new PasLibreException("Livre déjà emprunté");
-		throw new IllegalStateException("Vous avez déjà emprunté ce livre.");
+	public EtatDocument emprunt(Document d, Abonne ab) throws PasLibreException, IllegalStateException {
+		if(abonne != ab){
+			throw new PasLibreException("Document déjà emprunté.");
+		}
+		throw new IllegalStateException("Vous avez déjà emprunté ce document.");
 	}
 
 	@Override
-	public EtatDocument reservation(Livre l, Abonne ab) throws PasLibreException, IllegalStateException {
+	public EtatDocument reservation(Document d, Abonne ab) throws PasLibreException, IllegalStateException {
 		if(abonne != ab)
-			throw new PasLibreException("Livre déjà emprunté");
-		throw new IllegalStateException("Vous avez déjà emprunté ce livre.");
+			Bibliothèque.getInstance().addWishingList(d,ab);
+			throw new PasLibreException("Document déjà emprunté");
+		throw new IllegalStateException("Vous avez déjà emprunté ce document.");
 	}
 
 	@Override
-	public EtatDocument retour() {
+	public EtatDocument retour(Document d) {
+		Mailer.getInstance().loadingMail(d);
 		return new DocumentLibre();
 	}
 

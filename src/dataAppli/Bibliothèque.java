@@ -95,4 +95,10 @@ public class Bibliothèque {
 		return instance;
 	}
 
+	public void addWishingList(Document d, Abonne ab) {
+		ArrayList<Abonne> temp= intéressés.get(d);
+		if(!temp.contains(ab)) temp.add(ab);
+		intéressés.put(d, temp);
+	}
+
 }

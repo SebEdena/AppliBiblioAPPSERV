@@ -3,10 +3,13 @@ package documents.etats;
 import java.util.Timer;
 
 import dataAppli.Abonne;
+import dataAppli.Bibliothèque;
+import dataAppli.Document;
 import dataAppli.PasLibreException;
 import documents.AnnuleRéservation;
 import documents.EtatDocument;
 import documents.Livre;
+import fileUtil.Mailer;
 
 public class DocumentRéservé implements EtatDocument {
 	
@@ -15,31 +18,33 @@ public class DocumentRéservé implements EtatDocument {
 	private Abonne abonné;
 	private Timer t;
 	
-	public DocumentRéservé(Livre l, Abonne ab) {
+	public DocumentRéservé(Document d, Abonne ab) {
 		abonné = ab;
 		t = new Timer();
-		t.schedule(new AnnuleRéservation(l, t), TIMER_RES2);
+		t.schedule(new AnnuleRéservation(d, t), TIMER_RES2);
 	}
 	
 	@Override
-	public EtatDocument emprunt(Abonne ab) throws PasLibreException, IllegalStateException {
+	public EtatDocument emprunt(Document d, Abonne ab) throws PasLibreException, IllegalStateException {
 		if(abonné == ab){
 			t.cancel();
 			return new DocumentEmprunté(ab);
 		}
-		throw new PasLibreException("Livre déjà réservé, "
+		throw new PasLibreException("Document déjà réservé, "
 						+ "indisponible à l'emprunt");
 	}
 
 	@Override
-	public EtatDocument reservation(Livre l, Abonne ab) throws PasLibreException, IllegalStateException {
+	public EtatDocument reservation(Document d, Abonne ab) throws PasLibreException, IllegalStateException {
 		if(abonné == ab)
-			throw new IllegalStateException("L'abonné a déjà réservé ce livre");
-		throw new PasLibreException("Livre déjà réservé");
+			throw new IllegalStateException("L'abonné a déjà réservé ce document");
+		Bibliothèque.getInstance().addWishingList(d,ab);
+		throw new PasLibreException("Document déjà réservé");
 	}
 
 	@Override
-	public EtatDocument retour() throws IllegalStateException {
+	public EtatDocument retour(Document d) throws IllegalStateException {
+		Mailer.getInstance().loadingMail(d);
 		return new DocumentLibre();
 	}
 

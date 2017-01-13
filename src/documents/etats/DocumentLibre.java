@@ -1,24 +1,24 @@
 package documents.etats;
 
 import dataAppli.Abonne;
+import dataAppli.Document;
 import documents.EtatDocument;
-import documents.Livre;
 
 public class DocumentLibre implements EtatDocument{
 
 	@Override
-	public EtatDocument emprunt(Abonne ab) {
+	public EtatDocument emprunt(Document d, Abonne ab) {
 		return new DocumentEmprunté(ab);
 	}
 
 	@Override
-	public EtatDocument reservation(Livre l, Abonne ab) {
-		return new DocumentRéservé(l, ab);
+	public EtatDocument reservation(Document d, Abonne ab) {
+		return new DocumentRéservé(d, ab);
 	}
 
 	@Override
-	public EtatDocument retour() throws IllegalStateException {
-		throw new IllegalStateException("Livre libre.");
+	public EtatDocument retour(Document d) throws IllegalStateException {
+		throw new IllegalStateException("Document libre.");
 	}
 
 	@Override

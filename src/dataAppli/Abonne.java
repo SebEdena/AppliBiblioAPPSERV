@@ -5,7 +5,7 @@ public class Abonne {
 	private static int cptAbonne = 0;
 	
 	private static final int TYPE_INDEX=0,
-			ID_INDEX=1, NOM_INDEX=2, DATA_SIZE=3;
+			ID_INDEX=1, NOM_INDEX=2, MAIL_INDEX=3, DATA_SIZE=4;
 	
 	private int idAbonne;
 	private String nom;
@@ -21,7 +21,8 @@ public class Abonne {
 						+ "libre est affecté à la place");
 				idAbonne = cptAbonne;
 			}
-			nom = data[NOM_INDEX];		
+			nom = data[NOM_INDEX];
+			mail = data[MAIL_INDEX];
 		}
 	}
 
@@ -38,6 +39,6 @@ public class Abonne {
 	}
 
 	public String getMail() {
-		return "h.matico@gmail.com"; //-------------mail abonné
+		return mail;
 	}
 }
