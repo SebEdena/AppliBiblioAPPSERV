@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Timer;
 
 import dataAppli.Abonne;
 import dataAppli.Bibliothèque;
@@ -13,8 +14,12 @@ import dataAppli.PasLibreException;
 
 public class ServiceEmprunt extends Service{
 	
+	private static final long DELAI_INACTIVITE = 10000;
+	private Timer t;
+	
 	public ServiceEmprunt(Socket accept) {
 		super(accept);
+		t = new Timer();
 	}
 	
 	@Override
@@ -26,7 +31,9 @@ public class ServiceEmprunt extends Service{
 			in = new BufferedReader (new InputStreamReader(getClient().getInputStream()));
 			out = new PrintWriter (getClient().getOutputStream (), true);
 
-			// lit la ligne
+			// lit les lignes en controlant l'inactivité
+			t.schedule(new FinDeService(this, t), DELAI_INACTIVITE);
+			
 			String line = in.readLine();
 			Integer id = Integer.parseInt(line);
 			Abonne ab = Bibliothèque.getInstance().findAbonne(id);
@@ -34,6 +41,7 @@ public class ServiceEmprunt extends Service{
 				throw new IllegalArgumentException("Abonné inexistant");
 
 			line = in.readLine();
+			t.cancel();
 			id = Integer.parseInt(line);
 			Document d = Bibliothèque.getInstance().findDocument(id);
 			if(d == null)
@@ -48,8 +56,7 @@ public class ServiceEmprunt extends Service{
 			out.println("L'emprunt a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {
-			System.out.println("pb dans les readers/writers");
-			out.println("L'emprunt a échoué pour des raisons techniques.");
+			System.err.println(e);
 		}
 		System.err.println("Fin du service");
 		try {getClient().close();} catch (IOException e2) {}

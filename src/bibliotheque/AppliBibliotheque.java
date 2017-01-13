@@ -37,7 +37,6 @@ public class AppliBibliotheque {
 			laSocket = new Socket(ADR_IP_BIBLIO, PORT_EMPRUNT);
 			BufferedReader socketIn = new BufferedReader(new InputStreamReader(laSocket.getInputStream()));
 			PrintWriter socketOut =  new PrintWriter(laSocket.getOutputStream(), true);
-
 			/* bonjour */
 			System.out.println("Bienvenue sur votre système d'emprunt : ");
 			System.out.println("Vous pouvez ici emprunter un livre disponible ");
@@ -56,8 +55,9 @@ public class AppliBibliotheque {
 			/* réception de la réponse
 			 * et affichage de cette réponse */
 			System.out.println(socketIn.readLine());
-
-		} catch (IOException e) {System.out.println("Connection fermee par le serveur");}
+			
+		} catch (IOException e) {System.out.println("Emprunt annulé : vous avez été déconnecté "
+											+ "pour inactivité de 3 minutes");}
 		try{
 			if(laSocket != null )
 				// fermeture de la connexion
@@ -82,12 +82,13 @@ public class AppliBibliotheque {
 
 			/* envoi des données au service */
 			socketOut.println(numDocument);
-
+			
 			/* réception de la réponse
 			 * et affichage de cette réponse */
 			System.out.println(socketIn.readLine());
 
-		} catch (IOException e) {System.out.println("Connection fermee par le serveur");}
+		} catch (IOException e) {System.out.println("Retour annulé : vous avez été déconnecté "
+										+ "pour inactivité de 3 minutes");}
 		try{
 			if(laSocket != null )
 				// fermeture de la connexion

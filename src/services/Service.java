@@ -18,7 +18,7 @@ public abstract class Service implements Runnable{
 	public void lancer(){
 		thread.start();
 	}
-
+	
 	public Socket getClient() {
 		return client;
 	}

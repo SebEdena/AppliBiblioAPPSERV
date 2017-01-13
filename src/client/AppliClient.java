@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class AppliClient {
 	
@@ -26,7 +27,7 @@ public class AppliClient {
 			System.out.println("Bienvenue sur votre système de réservation : ");
 			System.out.println("Vous pouvez ici réserver un livre disponible ");
 			System.out.println("et passer le chercher dans les 2 heures");
-
+			
 			/* saisie des données */;
 			System.out.println("Votre numéro d'abonné, svp :");
 			while((numAbonné = isInteger(clavier.next()))<=0);
@@ -41,7 +42,8 @@ public class AppliClient {
 			 * et affichage de cette réponse */
 			System.out.println(socketIn.readLine());
 			
-		} catch (IOException e) {System.out.println("Connection fermee par le serveur");}
+		} catch (IOException e) {System.out.println("Réservation annulée : vous avez été déconnecté "
+				+ "pour inactivité de 10 minutes");}
 		try{
 			if(laSocket != null )
 				// fermeture de la connexion
