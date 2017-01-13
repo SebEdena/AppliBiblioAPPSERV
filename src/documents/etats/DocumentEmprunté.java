@@ -25,9 +25,10 @@ public class DocumentEmprunté implements EtatDocument {
 
 	@Override
 	public EtatDocument reservation(Document d, Abonne ab) throws PasLibreException, IllegalStateException {
-		if(abonne != ab)
+		if(abonne != ab){
 			Bibliothèque.getInstance().addWishingList(d,ab);
 			throw new PasLibreException("Document déjà emprunté");
+		}
 		throw new IllegalStateException("Vous avez déjà emprunté ce document.");
 	}
 
