@@ -2,12 +2,15 @@
 <data>     
 	<abonne id="1">
 		<nom>Stephane Manamanche</nom>
+		<mail></mail>
 	</abonne>     
 	<abonne id="2">
 		<nom>Mathieu Valentin</nom>
+		<mail>h.matico@gmail.com</mail>
 	</abonne>     
 	<abonne id="3">
 		<nom>Georges Robert</nom>
+		<mail></mail>
 	</abonne>
 	<livre id="1">
 		<nom>En attendant Godot</nom>
