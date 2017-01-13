@@ -1,17 +1,15 @@
 package documents;
 
-import java.util.Timer;
-
-import bibliotheque.Abonne;
-import bibliotheque.Document;
-import documents.etats.LivreLibre;
+import dataAppli.Abonne;
+import dataAppli.Document;
+import dataAppli.PasLibreException;
+import documents.etats.DocumentLibre;
 
 public class Livre implements Document{
 	private static int cptLivre = 0;
 	
 	private static final int TYPE_INDEX=0,
-			ID_INDEX=1, TITRE_INDEX=2, AUTEUR_INDEX=3,
-			EMP_INDEX = 4, RES_INDEX=5;
+			ID_INDEX=1, TITRE_INDEX=2, AUTEUR_INDEX=3;
 	
 	private int idLivre;
 	
@@ -19,7 +17,7 @@ public class Livre implements Document{
 	
 	private String auteur;
 	
-	private EtatLivre etat;
+	private EtatDocument etat;
 	
 	public Livre(String[] data) {
 		
@@ -34,7 +32,7 @@ public class Livre implements Document{
 			}
 			titre = data[TITRE_INDEX];
 			auteur = data[TITRE_INDEX];
-			etat = new LivreLibre();
+			etat = new DocumentLibre();
 		}
 	}
 
@@ -44,26 +42,22 @@ public class Livre implements Document{
 	}
 
 	@Override
-	public void reserver(Abonne ab) throws PasLibreException {
+	public synchronized void reserver(Abonne ab) throws PasLibreException {
 		if(ab != null){
-			etat = etat.reservation(null, ab);
+			etat = etat.reservation(this, ab);
 		}
 	}
 
 	@Override
-	public void emprunter(Abonne ab) throws PasLibreException {
+	public synchronized void emprunter(Abonne ab) throws PasLibreException {
 		if(ab != null){
 			etat = etat.emprunt(ab);
 		}
 	}
 
 	@Override
-	public void retour() {
+	public synchronized void retour() {
 		etat = etat.retour();
-	}
-
-	void annuleReservation() {
-		etat = etat.annuleReservation();
 	}
 	
 	@Override

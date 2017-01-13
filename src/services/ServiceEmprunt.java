@@ -6,11 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import bibliotheque.Abonne;
-import bibliotheque.Bibliothèque;
-import bibliotheque.Document;
-import bibliotheque.TestsBiblio;
-import documents.PasLibreException;
+import dataAppli.Abonne;
+import dataAppli.Bibliothèque;
+import dataAppli.Document;
+import dataAppli.PasLibreException;
 
 public class ServiceEmprunt extends Service{
 	

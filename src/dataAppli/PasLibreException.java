@@ -1,4 +1,4 @@
-package documents;
+package dataAppli;
 
 public class PasLibreException extends Exception {
 

@@ -1,6 +1,4 @@
-package bibliotheque;
-
-import documents.PasLibreException;
+package dataAppli;
 
 public interface Document {
 	int numero();

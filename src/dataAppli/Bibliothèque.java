@@ -1,10 +1,9 @@
-package bibliotheque;
+package dataAppli;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import documents.Livre;
-import documents.PasLibreException;
 import fileUtil.XMLReader;
 
 public class Bibliothèque {
@@ -82,9 +81,5 @@ public class Bibliothèque {
 		if(instance == null)
 			instance = new Bibliothèque(path);
 		return instance;
-	}
-	
-	public static void setPath(String newpath){
-		path = newpath;
 	}
 }

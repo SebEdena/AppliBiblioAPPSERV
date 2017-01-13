@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import fileUtil.ControleSaisie;
+
 public class AppliBibliotheque {
 	
 	private static final String ADR_IP_BIBLIO = "localhost";
@@ -43,9 +45,9 @@ public class AppliBibliotheque {
 
 			/* saisie des données */;
 			System.out.println("Votre numéro d'abonné, svp :");
-			while((numAbonné = isInteger(clavier.next()))<=0);
+			while((numAbonné = ControleSaisie.isInteger(clavier.next()))<=0);
 			System.out.println("Le numéro de livre que vous souhaitez emprunter :");
-			while((numDocument = isInteger(clavier.next()))<=0);
+			while((numDocument = ControleSaisie.isInteger(clavier.next()))<=0);
 
 			/* envoi des données au service */
 			socketOut.println(numAbonné);
@@ -76,7 +78,7 @@ public class AppliBibliotheque {
 			
 			/* saisie des données */;
 			System.out.println("Le numéro de livre que vous souhaitez retourner :");
-			while((numDocument = isInteger(clavier.next()))<=0);
+			while((numDocument = ControleSaisie.isInteger(clavier.next()))<=0);
 
 			/* envoi des données au service */
 			socketOut.println(numDocument);
@@ -91,13 +93,5 @@ public class AppliBibliotheque {
 				// fermeture de la connexion
 				laSocket.close();
 		}catch(IOException e){}
-	}
-
-	public static int isInteger(String s){
-		try {
-			return Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			return 0;
-		}
 	}
 }

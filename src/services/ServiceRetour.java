@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import bibliotheque.Bibliothèque;
-import bibliotheque.Document;
+import dataAppli.Bibliothèque;
+import dataAppli.Document;
 
 public class ServiceRetour extends Service{
 
