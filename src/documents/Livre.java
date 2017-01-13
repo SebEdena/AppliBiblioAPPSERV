@@ -31,7 +31,7 @@ public class Livre implements Document{
 				idLivre = cptLivre;
 			}
 			titre = data[TITRE_INDEX];
-			auteur = data[TITRE_INDEX];
+			auteur = data[AUTEUR_INDEX];
 			etat = new DocumentLibre();
 		}
 	}
@@ -60,9 +60,13 @@ public class Livre implements Document{
 		etat = etat.retour();
 	}
 	
+	public String getStatus(){
+		return this.toString() + ", " + etat.getStatus();
+	}
+	
 	@Override
 	public String toString() {
-		return idLivre + " : \"" + titre + "\", " + auteur + 
-				", " + etat.getStatus();
+		return idLivre + " : \"" + titre + "\", " + auteur;
+				
 	}
 }

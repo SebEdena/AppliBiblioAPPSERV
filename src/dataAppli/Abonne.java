@@ -9,6 +9,7 @@ public class Abonne {
 	
 	private int idAbonne;
 	private String nom;
+	private String mail;
 	
 	public Abonne(String[] data) {
 		if(data.length == DATA_SIZE && data[TYPE_INDEX].equals("abonne")){
@@ -34,5 +35,9 @@ public class Abonne {
 
 	public String getNom() {
 		return nom;
+	}
+
+	public String getMail() {
+		return "h.matico@gmail.com"; //-------------mail abonné
 	}
 }

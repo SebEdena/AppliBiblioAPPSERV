@@ -2,6 +2,9 @@ package serveur;
 
 import java.io.IOException;
 
+import dataAppli.Bibliothèque;
+import fileUtil.Mailer;
+
 public class ApplicationServeur {
 	
 	private final static int PORT_RESERVATION = 2500;
@@ -16,6 +19,8 @@ public class ApplicationServeur {
 			System.out.println("Serveur d'emprunt sur le port " + PORT_EMPRUNT);
 			new ServeurRetour(PORT_RETOUR).lancer();
 			System.out.println("Serveur de retour sur le port " + PORT_RETOUR);
+			
+			Mailer.getInstance().loadingMail(Bibliothèque.getInstance().getDocuments().get(0)); //------------- test envoi
 			
 		} catch (IOException e) {
 				System.err.println("Pb lors de la création d'un des trois serveurs : " +  e);			

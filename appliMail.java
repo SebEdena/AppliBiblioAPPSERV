@@ -22,7 +22,7 @@ public class appli {
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("h.matico@gmail.com", "");
+				return new PasswordAuthentication("bibliotheque465@gmail.com", "connexion");
 			}
 		});
 

@@ -1,6 +1,7 @@
 package dataAppli;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import documents.Livre;
@@ -18,10 +19,13 @@ public class Bibliothèque {
 	
 	private List<Abonne> abonnes;
 	
+	private HashMap<Document,ArrayList<Abonne>> intéressés;
+	
 	
 	private Bibliothèque(String path){
 		documents = new ArrayList<Document>();
 		abonnes = new ArrayList<Abonne>();
+		intéressés = new HashMap<Document, ArrayList<Abonne>>();
 		init();
 	}
 
@@ -77,9 +81,18 @@ public class Bibliothèque {
 		return abonnes;
 	}
 	
+	public ArrayList<Abonne> getIntéressés(Document d){
+		return intéressés.get(d);
+	}
+	
+	public void clearIntéressés(Document d) {
+		intéressés.remove(d);
+	}
+	
 	public static Bibliothèque getInstance(){
 		if(instance == null)
 			instance = new Bibliothèque(path);
 		return instance;
 	}
+
 }
