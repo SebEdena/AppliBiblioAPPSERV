@@ -6,17 +6,17 @@ import java.util.TimerTask;
 import dataAppli.Document;
 
 public class AnnuleRéservation extends TimerTask {
-	private Document livre;
+	private Document doc;
 	private Timer timer;
 
 	public AnnuleRéservation(Document d, Timer t) {
-		livre = d;
+		doc = d;
 		timer = t;
 	}
 
 	@Override
 	public void run() {
-		livre.retour();
+		doc.retour();
 		timer.cancel();
 	}
 

@@ -13,8 +13,9 @@ import dataAppli.Document;
 import dataAppli.PasLibreException;
 
 public class ServiceReservation extends Service{
-
-	private static final long DELAI_INACTIVITE = 10000;
+	
+	//Variable du timer à modifier pour tester l'inactivité de 10 minutes
+	private static final long DELAI_INACTIVITE = 600000;
 	private Timer t;
 	
 	public ServiceReservation(Socket accept) {
@@ -48,12 +49,17 @@ public class ServiceReservation extends Service{
 				throw new IllegalArgumentException("Document inexistant");
 
 			d.reserver(ab);
-
-			System.out.println(d);
 			out.println("La réservation a été effectuée.");
+			System.out.println("Réservation ok.");
 		}
-		catch (PasLibreException | IllegalArgumentException | IllegalStateException e){
+		catch (PasLibreException e){
+			out.println("La réservation a échoué : " + e.getMessage() +
+					". Vous recevrez un mail quand le document sera à nouveau disponible.");
+			System.out.println("Réservation pas ok.");
+		}
+		catch (IllegalArgumentException | IllegalStateException e){
 			out.println("La réservation a échoué. Motif : " + e.getMessage());
+			System.out.println("Réservation pas ok.");
 		}
 		catch (IOException e) {
 			System.err.println(e);

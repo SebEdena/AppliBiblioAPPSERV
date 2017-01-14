@@ -18,7 +18,8 @@ public class AppliBibliotheque {
 	public static void main(String[] args) throws IOException {
 		Scanner clavier = new Scanner(System.in);
 		
-		System.out.println("Bienvenue sur l'application de la bibliothèque. Voulez-vous emprunter ou rendre un livre ?");
+		System.out.println("Bienvenue sur l'application de la bibliothèque. "
+				+ "Voulez-vous emprunter ou rendre un document ?");
 		System.out.println("\"emprunt\" ou \"retour\"");
 		String choix = clavier.next();
 		
@@ -39,13 +40,13 @@ public class AppliBibliotheque {
 			PrintWriter socketOut =  new PrintWriter(laSocket.getOutputStream(), true);
 			/* bonjour */
 			System.out.println("Bienvenue sur votre système d'emprunt : ");
-			System.out.println("Vous pouvez ici emprunter un livre disponible ");
+			System.out.println("Vous pouvez ici emprunter un document disponible ");
 			System.out.println("qui n'est pas déjà réservé par quelqu'un d'autre");
 
 			/* saisie des données */;
 			System.out.println("Votre numéro d'abonné, svp :");
 			while((numAbonné = ControleSaisie.isInteger(clavier.next()))<=0);
-			System.out.println("Le numéro de livre que vous souhaitez emprunter :");
+			System.out.println("Le numéro de document que vous souhaitez emprunter :");
 			while((numDocument = ControleSaisie.isInteger(clavier.next()))<=0);
 
 			/* envoi des données au service */
@@ -74,10 +75,10 @@ public class AppliBibliotheque {
 			PrintWriter socketOut =  new PrintWriter(laSocket.getOutputStream(), true);
 
 			/* bonjour */
-			System.out.println("Bienvenue sur votre système de retour de livre");
+			System.out.println("Bienvenue sur votre système de retour de document.");
 			
 			/* saisie des données */;
-			System.out.println("Le numéro de livre que vous souhaitez retourner :");
+			System.out.println("Le numéro de document que vous souhaitez retourner :");
 			while((numDocument = ControleSaisie.isInteger(clavier.next()))<=0);
 
 			/* envoi des données au service */

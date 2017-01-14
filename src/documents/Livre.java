@@ -51,17 +51,13 @@ public class Livre implements Document{
 	@Override
 	public synchronized void emprunter(Abonne ab) throws PasLibreException {
 		if(ab != null){
-			etat = etat.emprunt(null, ab);
+			etat = etat.emprunt(this, ab);
 		}
 	}
 
 	@Override
 	public synchronized void retour() {
-		etat = etat.retour(null);
-	}
-	
-	public String getStatus(){
-		return this.toString() + ", " + etat.getStatus();
+		etat = etat.retour(this);
 	}
 	
 	@Override

@@ -2,10 +2,10 @@ package dataAppli;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import fileUtil.XMLReader;
-import org.junit.Assert;
 
 public class TestsBiblio {
 	

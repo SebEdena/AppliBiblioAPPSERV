@@ -14,7 +14,8 @@ import dataAppli.PasLibreException;
 
 public class ServiceEmprunt extends Service{
 	
-	private static final long DELAI_INACTIVITE = 10000;
+	//Variable du timer à modifier pour tester l'inactivité de 3 minutes
+	private static final long DELAI_INACTIVITE = 180000;
 	private Timer t;
 	
 	public ServiceEmprunt(Socket accept) {
@@ -49,11 +50,17 @@ public class ServiceEmprunt extends Service{
 
 			d.emprunter(ab);
 
-			System.out.println(d);
 			out.println("L'emprunt a été enregistré.");
+			System.out.println("Emprunt ok.");
 		}
-		catch (PasLibreException | IllegalArgumentException | IllegalStateException e){
-			out.println("L'emprunt a échoué. Motif : " + e.getMessage());
+		catch (PasLibreException e){
+			System.out.println("Emprunt pas ok.");
+			out.println("La réservation a échoué : " + e.getMessage() +
+					". Vous recevrez un mail quand le document sera à nouveau disponible.");
+		}
+		catch (IllegalArgumentException | IllegalStateException e){
+			System.out.println("Emprunt pas ok.");
+			out.println("La réservation a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {
 			System.err.println(e);

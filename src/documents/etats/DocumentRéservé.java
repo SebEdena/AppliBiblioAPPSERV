@@ -5,15 +5,15 @@ import java.util.Timer;
 import dataAppli.Abonne;
 import dataAppli.Bibliothèque;
 import dataAppli.Document;
+import dataAppli.Mailer;
 import dataAppli.PasLibreException;
 import documents.AnnuleRéservation;
 import documents.EtatDocument;
-import documents.Livre;
-import fileUtil.Mailer;
 
 public class DocumentRéservé implements EtatDocument {
 	
-	private static final long TIMER_RES = 7200000, TIMER_RES2 = 30000;
+	//Timer utilisé pour la durée de réservation
+	private static final long TIMER_RES = 7200000;
 	
 	private Abonne abonné;
 	private Timer t;
@@ -21,7 +21,7 @@ public class DocumentRéservé implements EtatDocument {
 	public DocumentRéservé(Document d, Abonne ab) {
 		abonné = ab;
 		t = new Timer();
-		t.schedule(new AnnuleRéservation(d, t), TIMER_RES2);
+		t.schedule(new AnnuleRéservation(d, t), TIMER_RES);
 	}
 	
 	@Override

@@ -3,9 +3,9 @@ package documents.etats;
 import dataAppli.Abonne;
 import dataAppli.Bibliothèque;
 import dataAppli.Document;
+import dataAppli.Mailer;
 import dataAppli.PasLibreException;
 import documents.EtatDocument;
-import fileUtil.Mailer;
 
 public class DocumentEmprunté implements EtatDocument {
 	
@@ -35,6 +35,7 @@ public class DocumentEmprunté implements EtatDocument {
 	@Override
 	public EtatDocument retour(Document d) {
 		Mailer.getInstance().loadingMail(d);
+		
 		return new DocumentLibre();
 	}
 

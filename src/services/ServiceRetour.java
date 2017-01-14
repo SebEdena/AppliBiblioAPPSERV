@@ -9,10 +9,12 @@ import java.util.Timer;
 
 import dataAppli.Bibliothèque;
 import dataAppli.Document;
+import dataAppli.PasLibreException;
 
 public class ServiceRetour extends Service{
 	
-	private static final long DELAI_INACTIVITE = 10000;
+	//Variable du timer à modifier pour tester l'inactivité de 3 minutes
+	private static final long DELAI_INACTIVITE = 180000;
 	private Timer t;
 	
 	public ServiceRetour(Socket accept) {
@@ -39,10 +41,11 @@ public class ServiceRetour extends Service{
 
 			d.retour();
 
-			System.out.println("Etat du livre : " + d);
 			out.println("Le retour a été enregistré.");
+			System.out.println("Retour ok.");
 		}
 		catch (IllegalArgumentException | IllegalStateException e){
+			System.out.println("Retour pas ok.");
 			out.println("Le retour a échoué. Motif : " + e.getMessage());
 		}
 		catch (IOException e) {

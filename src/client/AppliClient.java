@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import java.util.Timer;
+
+import fileUtil.ControleSaisie;
 
 public class AppliClient {
 	
@@ -25,14 +26,14 @@ public class AppliClient {
 
 			/* bonjour */
 			System.out.println("Bienvenue sur votre système de réservation : ");
-			System.out.println("Vous pouvez ici réserver un livre disponible ");
+			System.out.println("Vous pouvez ici réserver un document disponible ");
 			System.out.println("et passer le chercher dans les 2 heures");
 			
 			/* saisie des données */;
 			System.out.println("Votre numéro d'abonné, svp :");
-			while((numAbonné = isInteger(clavier.next()))<=0);
-			System.out.println("Le numéro de livre que vous souhaitez réserver :");
-			while((numDocument = isInteger(clavier.next()))<=0);
+			while((numAbonné = ControleSaisie.isInteger(clavier.next()))<=0);
+			System.out.println("Le numéro de document que vous souhaitez réserver :");
+			while((numDocument = ControleSaisie.isInteger(clavier.next()))<=0);
 
 			/* envoi des données au service */
 			socketOut.println(numAbonné);
@@ -49,14 +50,6 @@ public class AppliClient {
 				// fermeture de la connexion
 				laSocket.close();
 		}catch(IOException e){}
-	}
-		
-	public static int isInteger(String s){
-		try {
-			return Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			return 0;
-		}
 	}
 }	
 

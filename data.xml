@@ -2,7 +2,7 @@
 <data>     
 	<abonne id="1">
 		<nom>Stephane Manamanche</nom>
-		<mail></mail>
+		<mail>mathieu.valentin1@orange.fr</mail>
 	</abonne>     
 	<abonne id="2">
 		<nom>Mathieu Valentin</nom>
@@ -10,7 +10,7 @@
 	</abonne>     
 	<abonne id="3">
 		<nom>Georges Robert</nom>
-		<mail></mail>
+		<mail>mathieu.valentin@etu.parisdescartes.fr</mail>
 	</abonne>
 	<livre id="1">
 		<nom>En attendant Godot</nom>
@@ -28,6 +28,6 @@
 		<nom>Le Japonais pour les nuls</nom>
 		<auteur>Stephane Martin</auteur>
 		<emprunt>0</emprunt>
-		<reserve>2</reserve>
+		<reserve>0</reserve>
 	</livre>
 </data>
