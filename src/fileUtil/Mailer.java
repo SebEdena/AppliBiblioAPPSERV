@@ -67,6 +67,5 @@ public class Mailer {
 			throw new RuntimeException("Erreur lors de l'envoi du mail : " + e);
 		}
 	}
-	
-	
+		
 }
